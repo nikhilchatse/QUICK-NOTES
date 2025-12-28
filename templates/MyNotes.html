@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+    {% include 'nav.html' %}
+    <div class="container mt-1">
+        <h1 class="text-center mb-4">My Notes</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="noteForm" class="mb-4" action="mynotes" method="post">
+                    <div class="mb-3">
+                        <label for="noteTitle" class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" id="noteTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="noteContent" class="form-label">Note</label>
+                        <textarea class="form-control" name="content" id="noteContent" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for contend in userContend %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{contend[1]}}</h5>
+                        <p class="card-text">{{contend[2]}}</p>
+                        <a href="/delete/{{contend[0]}}" class="btn btn-danger">DELETE</a>
+                        <a href="/update/{{contend[0]}}" class="btn btn-success">UPDATE</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+    
+</body>
+</html>
