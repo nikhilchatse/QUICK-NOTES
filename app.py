@@ -129,7 +129,7 @@ def delete(id):
 
 @app.route("/update/<int:id>")
 def update(id):
-    if "user_id " not in session:
+    if "user_id" not in session:
         redirect(url_for("login"))
     
     user_id=session["user_id"]
@@ -141,10 +141,10 @@ def update(id):
     con.commit()
     return render_template("update.html",user=user)
 
-@app.route("/updatesave")
+@app.route("/updatesave",methods=['POST'])
 def updatesave():
     if "user_id" not in session:
-        redirect(url_for("login"))
+        return redirect(url_for("login"))
     user_id=session["user_id"]
 
     con=db_connection()
@@ -160,7 +160,7 @@ def updatesave():
         con.commit()
         con.close()
 
-        redirect(url_for("mynotes"))
+        return redirect(url_for("mynotes"))
     
 
 
